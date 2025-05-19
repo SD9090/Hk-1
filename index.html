@@ -1,20 +1,19 @@
-
 <!DOCTYPE html>
 <html lang="gu">
 <head>
   <meta charset="UTF-8">
-  <title>HK Factory Outlet (VethiQ) & HK Fashion (MUKALAL)</title>
+  <title>SD Fashion</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
       padding: 20px;
       text-align: center;
-      background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+      background: linear-gradient(to right, #ffe0ec, #e0f7fa);
     }
     h1 {
       font-size: 36px;
       font-weight: bold;
-      background: linear-gradient(to right, #2b5876, #4e4376);
+      background: linear-gradient(to right, #ff4081, #7c4dff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 10px;
@@ -34,24 +33,23 @@
       border: 1px solid #ccc;
       border-radius: 8px;
       padding: 10px;
-      font-weight: bold;
     }
     button {
       padding: 12px 25px;
       font-size: 16px;
-      background-color: #00796b;
+      background-color: #34a853;
       color: white;
       border: none;
       border-radius: 8px;
       cursor: pointer;
     }
     button:hover {
-      background-color: #004d40;
+      background-color: #2c8c47;
     }
   </style>
 </head>
 <body>
-  <h1>HK Factory Outlet (VethiQ) & HK Fashion (MUKALAL)</h1>
+  <h1>SD Fashion</h1>
   <p>તમારું રિવ્યૂ નીચે આપેલ લખાણમાંથી કૉપિ કરી અને સીધું Google રિવ્યૂ પેજ ખોલી શકો છો.</p>
   <textarea id="reviewText" readonly>લોડ થઈ રહ્યું છે...</textarea>
   <br>
@@ -60,7 +58,7 @@
   <script>
     async function loadReview() {
       try {
-        const response = await fetch('hk_outlet_reviews_final_clean.json');
+        const response = await fetch('reviews.json');
         const reviews = await response.json();
         const randomReview = reviews[Math.floor(Math.random() * reviews.length)];
         document.getElementById("reviewText").value = randomReview;
@@ -70,34 +68,9 @@
     }
 
     function copyAndRedirect() {
-      const reviewText = document.getElementById("reviewText").value;
-
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(reviewText).then(() => {
-          alert("રિવ્યૂ કોપી થઈ ગયો છે!");
-          window.open("https://g.page/r/CQL6YaZ4hugaEAE/review", "_blank");
-        }).catch(() => {
-          fallbackCopy(reviewText);
-        });
-      } else {
-        fallbackCopy(reviewText);
-      }
-    }
-
-    function fallbackCopy(text) {
-      const textArea = document.createElement("textarea");
-      textArea.value = text;
-      textArea.style.position = "fixed";
-      document.body.appendChild(textArea);
-      textArea.focus();
+      const textArea = document.getElementById("reviewText");
       textArea.select();
-      try {
-        document.execCommand('copy');
-        alert("રિવ્યૂ કોપી થઈ ગયો છે!");
-      } catch (err) {
-        alert("કોપી ન થઇ શક્યું, કૃપા કરીને મેન્યુઅલી કોપી કરો.");
-      }
-      document.body.removeChild(textArea);
+      document.execCommand("copy");
       window.open("https://g.page/r/CQL6YaZ4hugaEAE/review", "_blank");
     }
 
