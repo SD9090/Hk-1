@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+  <meta charset="UTF-8">
+  <title>HK Factory Outlet (VethiQ) & HK Fashion (MUKALAL)</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      padding: 20px;
+      text-align: center;
+      background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+    }
+    h1 {
+      font-size: 36px;
+      font-weight: bold;
+      background: linear-gradient(to right, #2b5876, #4e4376);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 18px;
+      color: #444;
+      margin-bottom: 20px;
+    }
+    textarea {
+      width: 90%;
+      height: 120px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      resize: none;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      font-weight: bold;
+    }
+    button {
+      padding: 12px 25px;
+      font-size: 16px;
+      background-color: #00796b;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #004d40;
+    }
+  </style>
+</head>
+<body>
+  <h1>HK Factory Outlet (VethiQ) & HK Fashion (MUKALAL)</h1>
+  <p>તમારું રિવ્યૂ નીચે આપેલ લખાણમાંથી કૉપિ કરી અને સીધું Google રિવ્યૂ પેજ ખોલી શકો છો.</p>
+  <textarea id="reviewText" readonly>લોડ થઈ રહ્યું છે...</textarea>
+  <br>
+  <button onclick="copyAndRedirect()">રિવ્યૂ કૉપિ કરો અને Google ખોલો</button>
+
+  <script>
+    async function loadReview() {
+      try {
+        const response = await fetch('hk_outlet_reviews_final_clean.json');
+        const reviews = await response.json();
+        const randomReview = reviews[Math.floor(Math.random() * reviews.length)];
+        document.getElementById("reviewText").value = randomReview;
+      } catch (error) {
+        document.getElementById("reviewText").value = "રિવ્યૂ લોડ કરવામાં ભૂલ આવી.";
+      }
+    }
+
+    function copyAndRedirect() {
+      const reviewText = document.getElementById("reviewText").value;
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(reviewText).then(() => {
+          alert("રિવ્યૂ કોપી થઈ ગયો છે!");
+          window.open("https://g.page/r/CQL6YaZ4hugaEAE/review", "_blank");
+        }).catch(() => {
+          fallbackCopy(reviewText);
+        });
+      } else {
+        fallbackCopy(reviewText);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        alert("રિવ્યૂ કોપી થઈ ગયો છે!");
+      } catch (err) {
+        alert("કોપી ન થઇ શક્યું, કૃપા કરીને મેન્યુઅલી કોપી કરો.");
+      }
+      document.body.removeChild(textArea);
+      window.open("https://g.page/r/CQL6YaZ4hugaEAE/review", "_blank");
+    }
+
+    window.onload = loadReview;
+  </script>
+</body>
+</html>
